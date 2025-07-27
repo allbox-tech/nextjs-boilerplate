@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  web:
+    build:
+      context: .
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - .:/app:cached
+      - node_modules:/app/node_modules
+      # Optional: persist Next.js cache for faster refreshes
+      - next_cache:/app/.next
+    environment:
+      NODE_ENV: development
+      # If you want to force polling:
+      # CHOKIDAR_USEPOLLING: "true"
+
+volumes:
+  node_modules:
+  next_cache:
+  pgdata:

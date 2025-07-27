@@ -1,0 +1,2 @@
+- Use orval.dev[https://orval.dev/]: For autogen APIs use orval
+- Setup React Query for SSR: you need to change the axios to next fetch
