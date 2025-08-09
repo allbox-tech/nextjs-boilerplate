@@ -4,19 +4,11 @@ import Image from "next/image";
 
 import { Product } from "@/features/products/types";
 import { cn } from "@/lib/utils";
-import { useBasketStore } from "@/features/basket/store";
 import { BasketProduct, BasketStore } from "@/features/basket/types";
+import { useBasketProduct } from "@/features/basket/hooks/useBasketProduct";
 
 const ProductCard: FC<{ product: Product }> = ({ product }) => {
-  const basketProduct = useBasketStore((state: BasketStore) =>
-    state.getProduct(product.id)
-  );
-  const increaseBasketProduct = useBasketStore(
-    (state: BasketStore) => state.addProduct
-  );
-  const decreaseBasketProduct = useBasketStore(
-    (state: BasketStore) => state.removeProduct
-  );
+  const { basketProduct, increase, decrease } = useBasketProduct(product);
 
   return (
     <div className={cn("border", "mb-2", "p-2", "rounded", "min-h-32")}>
@@ -28,17 +20,11 @@ const ProductCard: FC<{ product: Product }> = ({ product }) => {
       />
       <h2 className={cn("font-bold")}>{product.title}</h2>
       <div className={cn("flex", "align-center", "justify-between")}>
-        <p
-          className={cn("text-lg")}
-          onClick={() => increaseBasketProduct(product)}
-        >
+        <p className={cn("text-lg")} onClick={() => increase()}>
           +
         </p>
         <p>{basketProduct?.quantity ?? 0}</p>
-        <p
-          className={cn("text-lg")}
-          onClick={() => decreaseBasketProduct(product.id)}
-        >
+        <p className={cn("text-lg")} onClick={() => decrease()}>
           -
         </p>
       </div>

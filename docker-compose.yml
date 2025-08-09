@@ -3,7 +3,7 @@ services:
   web:
     build:
       context: .
-    command: npm run dev
+    command: sh -c "pnpm install && pnpm dev"
     ports:
       - "3000:3000"
     env_file:

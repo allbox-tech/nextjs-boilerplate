@@ -1,10 +1,12 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import dynamic from "next/dynamic";
 
 import { QueryProvider } from "@/providers/query";
 import { ThemeProvider } from "@/providers/theme";
 import { AuthProvider } from "@/contexts/auth";
+import { JotaiDevTools } from "@/components/jotaiDevTools";
 
 import "@/styles/globals.css";
 
@@ -32,6 +34,7 @@ export default function RootLayout({
       <body className={`${vazirmatn.variable} font-vazirmatn antialiased`}>
         <AuthProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <JotaiDevTools />
             <QueryProvider>{children}</QueryProvider>
           </ThemeProvider>
         </AuthProvider>

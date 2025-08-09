@@ -1,8 +1,13 @@
 "use client";
 
 import { atomWithStorage } from "jotai/utils";
+import { withImmer } from "jotai-immer";
 
 import { Product } from "@/features/products/types";
-import { BasketProduct, BasketStore } from "./types";
+import { BasketProduct, BasketState } from "./types";
 
-export const basket = atomWithStorage<BasketStore>("basket", {});
+const baseBasketAtom = atomWithStorage<BasketState>("basket", {
+  products: [],
+});
+
+export const basketAtom = withImmer(baseBasketAtom);
